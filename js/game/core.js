@@ -139,14 +139,32 @@ Puppity.Player.prototype.move = function() {
 
 Puppity.George = function(game, x, y, image) {
     Phaser.Sprite.call(this, game, x, y, image);
+    this.anchor.setTo(0.5, 0.5);
 
     // TODO: add to configs
     var twn = this.game.add.tween(game.add.existing(this));
-    twn.to( { y : 96 }, 2000, Phaser.Easing.In, true, 500, -1, true).repeatDelay(2000);
+    twn.to( { y : 96 }, 2000, Phaser.Easing.In, true, 500, -1, true).repeatDelay(2000)
+        .onLoop.add(function() { this.throw(this.x, this.y); }, this);
+
+    // setup items
+    this.emitter = game.add.emitter(0, 0, 40);
+    this.emitter.makeParticles('bone');
+    this.emitter.gravity = 200;
+    this.emitter.bounce.setTo(0.3, 0.3);
 }
 
 Puppity.George.prototype = Object.create(Phaser.Sprite.prototype);
 Puppity.George.prototype.constructor = Puppity.George;
+
+Puppity.George.prototype.throw = function(x, y) {
+    // TODO: add eventful item select
+    if (y > 16) {
+        this.emitter.x = x;
+        this.emitter.y = y;
+
+        this.emitter.start(true, 4000, null, 3);
+    }
+}
 
 // unused
 Puppity.Blocks = function(game, x, y, image, num) {

@@ -14,8 +14,12 @@ Puppity.Game.prototype = {
         this.player.addCollision(this.floors);
         this.player.addCollision(this.walls);
         this.player.addCollision(this.blocks);
+        this.player.addCollision(this.george.emitter);
     },
     update: function(){
+        // TODO: add collisions to george object
+        // this.game.physics.arcade.collide(this.george.emitter, this.floors);
+        // this.game.physics.arcade.collide(this.george.emitter, this.walls);
         this.player.collide();
         this.player.move();
     },

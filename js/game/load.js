@@ -5,6 +5,7 @@ Puppity.Load.prototype = {
     preload: function(){
         this.game.load.spritesheet('player', 'assets/hamburger_32.png', 32, 32);
         this.game.load.image('george', 'assets/george_64x64.png');
+        this.game.load.image('bone', 'assets/bone_tmp.png');
         
         this.game.load.image('floor', 'assets/floor_32.png');
         this.game.load.image('block', 'assets/block_32.png');
